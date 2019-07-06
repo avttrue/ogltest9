@@ -77,22 +77,6 @@ bool MaterialLibrary::load(const QString &filename)
             }
             else { qCritical() << "Error at line (count):" << str; ok = false; }
         }
-        else if(newMtl && key.toLower() == "ke")
-        {
-            qDebug() << str;
-        }
-        else if(newMtl && key.toLower() == "ni")
-        {
-            qDebug() << str;
-        }
-        else if(newMtl && key.toLower() == "d")
-        {
-            qDebug() << str;
-        }
-        else if(newMtl && key.toLower() == "illum")
-        {
-            qDebug() << str;
-        }
         else if(newMtl && key.toLower() == "map_kd")
         {
             if(strlist.size() > 1)
@@ -103,6 +87,9 @@ bool MaterialLibrary::load(const QString &filename)
             }
             else { qCritical() << "Error at line (count):" << str; ok = false; }
         }
+
+        //else continue;
+
         add(newMtl);
     }
 

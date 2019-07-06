@@ -71,11 +71,6 @@ void Object3D::draw(QOpenGLShaderProgram *program, QOpenGLFunctions *functions)
     modelMatrix.scale(m_Scale);         // *
     modelMatrix = m_GlobalTransform * modelMatrix;
 
-//    qDebug() << "m_Material->DiffuseColor =" << m_Material->DiffuseColor();
-//    qDebug() << "m_Material->AmbienceColor =" << m_Material->AmbienceColor();
-//    qDebug() << "m_Material->SpecularColor =" << m_Material->SpecularColor();
-//    qDebug() << "m_Material->Shines =" << m_Material->Shines();
-
     program->setUniformValue("u_ModelMatrix", modelMatrix);
     program->setUniformValue("u_MaterialProperty.DiffuseColor", m_Material->DiffuseColor());
     program->setUniformValue("u_MaterialProperty.AmbienceColor", m_Material->AmbienceColor());

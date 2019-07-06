@@ -29,6 +29,7 @@ void main(void)
     vec4 reflectionColor = vec4(1.0, 1.0, 1.0, 1.0); //цвет блика белый
 
     if(u_IsUseDiffuseMap == false) diffMatColor = vec4(u_MaterialProperty.DiffuseColor, 1.0);
+
     vec4 diffColor = diffMatColor * u_LightPower * max(0.0, dot(v_normal, -lightVec));
     resultColor += diffColor;
 
