@@ -31,6 +31,7 @@ void Object3D::free()
 {
     if(m_VertexBuffer.isCreated()) m_VertexBuffer.destroy();
     if(m_IndexBuffer.isCreated()) m_IndexBuffer.destroy();
+
     if(m_Texture != nullptr && m_Texture->isCreated())
     { delete m_Texture; m_Texture = nullptr; }
 }

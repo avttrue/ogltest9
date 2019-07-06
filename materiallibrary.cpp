@@ -103,7 +103,7 @@ bool MaterialLibrary::load(const QString &filename)
 void MaterialLibrary::add(Material *m)
 {
     if(!m) return;
-    for(auto o: m_Materials) if(o->Name() == m->Name()) return;
+    for(auto o: m_Materials) if(o == m) return;
     m_Materials.append(m);
     qDebug() << "Material count:" << m_Materials.count();
 }
