@@ -17,28 +17,28 @@ varying highp vec3 v_normal;
 
 void main(void)
 {
-    vec4 resultColor = vec4(0.0, 0.0, 0.0, 0.0); // результирующий цвет чёрный
-    vec4 eyePosition = vec4(0.0, 0.0, 0.0, 1.0); // позиция наблюдателя
+    vec4 resultColor = vec4(0.0f, 0.0f, 0.0f, 0.0f); // результирующий цвет чёрный
+    vec4 eyePosition = vec4(0.0f, 0.0f, 0.0f, 1.0f); // позиция наблюдателя
     vec4 diffMatColor = texture2D(u_Texture, v_textcoord); // диффузный цвет
     vec3 eyeVec = normalize(v_position.xyz - eyePosition.xyz); // направление взгляда
     vec3 lightVec = normalize(v_position.xyz - u_LightPosition.xyz); // вектор освещения
     vec3 reflectLight = normalize(reflect(lightVec, v_normal)); // отражённый свет
     float len = length(v_position.xyz - eyePosition.xyz); // расстояние от наблюдателя до точки
     float specularFactor = u_MaterialProperty.Shines; // размер пятна блика
-    float ambientFactor = 0.1; // светимость материала
-    vec4 reflectionColor = vec4(1.0, 1.0, 1.0, 1.0); //цвет блика белый
+    float ambientFactor = 0.1f; // светимость материала
+    vec4 reflectionColor = vec4(1.0f, 1.0f, 1.0f, 1.0f); //цвет блика белый
 
-    if(u_IsUseDiffuseMap == false) diffMatColor = vec4(u_MaterialProperty.DiffuseColor, 1.0);
+    if(u_IsUseDiffuseMap == false) diffMatColor = vec4(u_MaterialProperty.DiffuseColor, 1.0f);
 
-    vec4 diffColor = diffMatColor * u_LightPower * max(0.0, dot(v_normal, -lightVec));
+    vec4 diffColor = diffMatColor * u_LightPower * max(0.0f, dot(v_normal, -lightVec));
     resultColor += diffColor;
 
     vec4 ambientColor = ambientFactor * diffMatColor;
-    resultColor += ambientColor * vec4(u_MaterialProperty.AmbienceColor, 1.0);
+    resultColor += ambientColor * vec4(u_MaterialProperty.AmbienceColor, 1.0f);
 
     vec4 specularColor = reflectionColor * u_LightPower *
-            pow(max(0.0, dot(reflectLight, -eyeVec)), specularFactor);
-    resultColor += specularColor * vec4(u_MaterialProperty.SpecularColor, 1.0);
+            pow(max(0.0f, dot(reflectLight, -eyeVec)), specularFactor);
+    resultColor += specularColor * vec4(u_MaterialProperty.SpecularColor, 1.0f);
 
     gl_FragColor = resultColor;
 }

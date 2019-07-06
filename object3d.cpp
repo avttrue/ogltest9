@@ -75,7 +75,10 @@ void Object3D::draw(QOpenGLShaderProgram *program, QOpenGLFunctions *functions)
     program->setUniformValue("u_MaterialProperty.DiffuseColor", m_Material->DiffuseColor());
     program->setUniformValue("u_MaterialProperty.AmbienceColor", m_Material->AmbienceColor());
     program->setUniformValue("u_MaterialProperty.SpecularColor", m_Material->SpecularColor());
-    program->setUniformValue("u_MaterialProperty.Shines", m_Material->Shines());
+    program->setUniformValue("u_MaterialProperty.Shines",
+                             //96.078431f
+                             m_Material->Shines()
+                             );
     program->setUniformValue("u_IsUseDiffuseMap", m_Material->isUseDiffuseMap());
 
     m_VertexBuffer.bind();

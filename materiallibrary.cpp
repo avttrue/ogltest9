@@ -25,7 +25,7 @@ bool MaterialLibrary::load(const QString &filename)
     {
         auto str = input.readLine(); if(str.isEmpty()) continue;
         auto strlist = str.split(' '); strlist.removeAll("");
-        auto key = strlist.at(0);
+        auto key = strlist.at(0).toLower();
 
         if (key == "#") { qDebug() << str; }
         else if(key == "newmtl")
@@ -39,13 +39,15 @@ bool MaterialLibrary::load(const QString &filename)
                 qCritical() << "Error at line (material name not present):" << str;
             }
         }
-        else if(newMtl && key.toLower() == "ns")
+        else if(key == "ns")
         {
+            if(!newMtl) { qCritical() << "Material not created"; continue; }
             if(strlist.size() > 1) newMtl->setShines(strlist.at(1).toFloat(&ok));
             else { qCritical() << "Error at line (count):" << str; ok = false; }
         }
-        else if(newMtl && key.toLower() == "ka")
+        else if(key == "ka")
         {
+            if(!newMtl) { qCritical() << "Material not created"; continue; }
             if(strlist.size() > 3)
             {
                 newMtl->setAmbienceColor(QVector3D(strlist.at(1).toFloat(&ok),
@@ -55,8 +57,9 @@ bool MaterialLibrary::load(const QString &filename)
             }
             else { qCritical() << "Error at line (count):" << str; ok = false; }
         }
-        else if(newMtl && key.toLower() == "kd")
+        else if(key == "kd")
         {
+            if(!newMtl) { qCritical() << "Material not created"; continue; }
             if(strlist.size() > 3)
             {
                 newMtl->setDiffuseColor(QVector3D(strlist.at(1).toFloat(&ok),
@@ -66,8 +69,9 @@ bool MaterialLibrary::load(const QString &filename)
             }
             else { qCritical() << "Error at line (count):" << str; ok = false; }
         }
-        else if(newMtl && key.toLower() == "ks")
+        else if(key == "ks")
         {
+            if(!newMtl) { qCritical() << "Material not created"; continue; }
             if(strlist.size() > 3)
             {
                 newMtl->setSpecularColor(QVector3D(strlist.at(1).toFloat(&ok),
@@ -77,8 +81,9 @@ bool MaterialLibrary::load(const QString &filename)
             }
             else { qCritical() << "Error at line (count):" << str; ok = false; }
         }
-        else if(newMtl && key.toLower() == "map_kd")
+        else if(key == "map_kd")
         {
+            if(!newMtl) { qCritical() << "Material not created"; continue; }
             if(strlist.size() > 1)
             {
                 auto file = apath + strlist.at(1);
@@ -87,9 +92,6 @@ bool MaterialLibrary::load(const QString &filename)
             }
             else { qCritical() << "Error at line (count):" << str; ok = false; }
         }
-
-        //else continue;
-
         add(newMtl);
     }
 
@@ -101,8 +103,9 @@ bool MaterialLibrary::load(const QString &filename)
 void MaterialLibrary::add(Material *m)
 {
     if(!m) return;
-    for(auto o: m_Materials) if(o == m) return;
+    for(auto o: m_Materials) if(o->Name() == m->Name()) return;
     m_Materials.append(m);
+    qDebug() << "Material count:" << m_Materials.count();
 }
 
 Material *MaterialLibrary::get(int index)

@@ -31,7 +31,7 @@ bool EngineObject3D::load(const QString &filename)
     {
         auto str = input.readLine(); if(str.isEmpty()) continue;
         auto strlist = str.split(' '); strlist.removeAll("");
-        auto key = strlist.at(0);
+        auto key = strlist.at(0).toLower();
 
         if (key == "#") { qDebug() << str; }
         else if(key == "mtllib")
@@ -44,19 +44,7 @@ bool EngineObject3D::load(const QString &filename)
             }
             else { qCritical() << "Error at line (count):" << str; ok = false; }
         }
-        else if(key.toLower() == "o")
-        {
-            qDebug() << str;
-        }
-        else if(key.toLower() == "g")
-        {
-            qDebug() << str;
-        }
-        else if(key.toLower() == "s")
-        {
-            qDebug() << str;
-        }
-        else if(key.toLower() == "v")
+        else if(key == "v")
         {
             if(strlist.size() > 3)
             {
@@ -67,7 +55,7 @@ bool EngineObject3D::load(const QString &filename)
             }
             else { qCritical() << "Error at line (count):" << str; ok = false; }
         }
-        else if(key.toLower() == "vt")
+        else if(key == "vt")
         {
             if(strlist.size() > 2)
             {
@@ -77,7 +65,7 @@ bool EngineObject3D::load(const QString &filename)
             }
             else { qCritical() << "Error at line (count):" << str; ok = false; }
         }
-        else if(key.toLower() == "vn")
+        else if(key == "vn")
         {
             if(strlist.size() == 4)
             {
@@ -88,7 +76,7 @@ bool EngineObject3D::load(const QString &filename)
             }
             else { qCritical() << "Error at line (count):" << str; ok = false; }
         }
-        else if(key.toLower() == "f")
+        else if(key == "f")
         {
             for(int i = 1; i < strlist.size(); i++)
             {
@@ -108,7 +96,7 @@ bool EngineObject3D::load(const QString &filename)
             }
             if(!ok) { qCritical() << "Error at line (format):" << str; }
         }
-        else if(key.toLower() == "usemtl")
+        else if(key == "usemtl")
         {
             if(strlist.size() > 1)
             {
