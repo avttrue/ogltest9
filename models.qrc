@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>models/cube.mtl</file>
+        <file>models/cube.obj</file>
+        <file>models/pyramid.mtl</file>
+        <file>models/pyramid.obj</file>
+        <file>models/sphere.mtl</file>
+        <file>models/sphere.obj</file>
+        <file>models/texture1.png</file>
+        <file>models/cube1.png</file>
+        <file>models/cube2.png</file>
+        <file>models/cube3.png</file>
+        <file>models/cube4.png</file>
+    </qresource>
+</RCC>

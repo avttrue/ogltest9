@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>shaders/fragshader.fsh</file>
+        <file>shaders/skybox.fsh</file>
+        <file>shaders/skybox.vsh</file>
+        <file>shaders/vertshader.vsh</file>
+    </qresource>
+</RCC>
