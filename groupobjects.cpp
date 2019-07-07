@@ -84,20 +84,24 @@ void GroupObjects::add(Transformational *obj)
 
 bool GroupObjects::del(Transformational *obj)
 {
-    return m_Objects.removeAll(obj) > 0 ? true : false;
+    bool result = m_Objects.removeAll(obj) > 0 ? true : false;
+
+    qDebug() << "Objects in group" << m_Name << ":" << m_Objects.count();
+    return result;
 }
 
 void GroupObjects::del(const int &ind)
 {
     m_Objects.remove(ind);
+    qDebug() << "Objects in group" << m_Name << ":" << m_Objects.count();
 }
 
 QString GroupObjects::Name()
 {
-  return m_Name;
+    return m_Name;
 }
 
 void GroupObjects::setName(const QString &n)
 {
-  m_Name = n;
+    m_Name = n;
 }

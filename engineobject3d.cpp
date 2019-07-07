@@ -9,6 +9,8 @@ EngineObject3D::~EngineObject3D()
 
 bool EngineObject3D::load(const QString &filename)
 {
+    if(m_Objects.size()) {qCritical() << "EngineObject not empty!"; return false; }
+
     QFile objfile(filename);
 
     if(! objfile.exists()) { qCritical() << "File not exist:" << filename; return false; }
