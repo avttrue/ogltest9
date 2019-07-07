@@ -11,7 +11,7 @@
 class GroupObjects : public Transformational
 {
 public:
-    GroupObjects();
+    GroupObjects(const QString &name);
     void draw(QOpenGLShaderProgram* program, QOpenGLFunctions* functions);
     void rotate(const QQuaternion &r);
     void translate(const QVector3D &t);
@@ -20,8 +20,11 @@ public:
     void add(Transformational* obj);
     bool del(Transformational* obj);
     void del(const int &ind);
+    QString Name();
+    void setName(const QString &n);
 
 private:
+    QString m_Name;
     QQuaternion m_Rotate;
     QVector3D m_Translate;
     QMatrix4x4 m_GlobalTransform;

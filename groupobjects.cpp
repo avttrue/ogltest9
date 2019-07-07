@@ -1,7 +1,8 @@
 #include "groupobjects.h"
 
-GroupObjects::GroupObjects()
+GroupObjects::GroupObjects(const QString &name)
 {
+    m_Name = name;
     m_Scale = 1.0f;
 }
 
@@ -78,6 +79,7 @@ void GroupObjects::add(Transformational *obj)
     localmatrix = m_GlobalTransform * localmatrix;
 
     obj->setGlobalTransform(localmatrix);
+    qDebug() << "Objects in group" << m_Name << ":" << m_Objects.count();
 }
 
 bool GroupObjects::del(Transformational *obj)
@@ -88,4 +90,14 @@ bool GroupObjects::del(Transformational *obj)
 void GroupObjects::del(const int &ind)
 {
     m_Objects.remove(ind);
+}
+
+QString GroupObjects::Name()
+{
+  return m_Name;
+}
+
+void GroupObjects::setName(const QString &n)
+{
+  m_Name = n;
 }
